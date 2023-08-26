@@ -10,7 +10,7 @@ from ..sensor import (
     MiscSensorEntity, RemainSensorEntity, StatusSensorEntity,
 )
 # from ..number import MinBatteryLevelEntity, MaxBatteryLevelEntity
-# from ..select import DictSelectEntity
+from ..select import DictSelectEntity
 
 class PowerStream(BaseDevice):
     def sensors(self, client: EcoflowMQTTClient) -> list[BaseSensorEntity]:
@@ -98,7 +98,7 @@ class PowerStream(BaseDevice):
 
     def selects(self, client: EcoflowMQTTClient) -> list[BaseSelectEntity]:
         return [
-            # DictSelectEntity(client, "supplyPriority", "Power supply mode", {"Prioritize power supply", "Prioritize power storage"},
-            #         lambda value: {"moduleType": 00, "operateType": "supplyPriority",
-            #                     "params": {"supplyPriority": value}}),
+            DictSelectEntity(client, "supplyPriority", "Power supply mode", {"Prioritize power supply", "Prioritize power storage"},
+                    lambda value: {"moduleType": 00, "operateType": "supplyPriority",
+                                "params": {"supplyPriority": value}}),
         ]
